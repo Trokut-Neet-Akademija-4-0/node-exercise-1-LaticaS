@@ -4,11 +4,11 @@ class Singleton {
 
   constructor(
     private isCalledFromParent: boolean = false,
-    public numberOfCalls: number = 0,
+    //public numberOfCalls: number = 0,        ??
   ) {
     if (Singleton.instance === undefined && !this.isCalledFromParent) {
       Singleton.instance = new Singleton(true)
-      Singleton.instance += 1
+      //Singleton.instance += 1              ??
     }
   }
   getInstance(): Singleton {
