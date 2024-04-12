@@ -12,6 +12,12 @@
     "zad2": "node --env-file=.env --import=tsx --watch ./zadaci/zad2.ts",
     "zad4": "node --env-file=.env --import=tsx --watch ./zadaci/zad4.ts",
     "zad6": "node --env-file=.env --import=tsx --watch ./zadaci/zad6.ts",
+    "zad7": "node --env-file=.env --import=tsx --watch ./zadaci/zad7.ts",
+    "zad8": "node --env-file=.env --import=tsx --watch ./zadaci/zad8.ts",
+    "zad9": "node --env-file=.env --import=tsx --watch ./zadaci/zad9.ts",
+    "zad10": "node --env-file=.env --import=tsx --watch ./zadaci/zad10.ts",
+    "zad11": "node --env-file=.env --import=tsx --watch ./zadaci/zad11.ts",
+    "zad12": "node --env-file=.env --import=tsx --watch ./zadaci/zad12.ts",
     "start": "node dist/index.js"
   },
   "author": "",
