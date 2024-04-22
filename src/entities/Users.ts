@@ -12,18 +12,18 @@ import { Address } from './Address'
 @Entity('Users', { schema: 'public' })
 export class Users {
   @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
-  id: string
+  id!: string
 
   @Column('character varying', { name: 'firstname', nullable: true })
-  firstname: string | null
+  firstname!: string | null
 
   @Column('character varying', { name: 'lastname', nullable: true })
-  lastname: string | null
+  lastname!: string | null
 
   @Column('character varying', { name: 'email', nullable: true })
-  email: string | null
+  email!: string | null
 
   @ManyToOne(() => Address, (address) => address.users)
   @JoinColumn([{ name: 'address_id', referencedColumnName: 'id' }])
-  address: Address
+  address!: Address
 }
