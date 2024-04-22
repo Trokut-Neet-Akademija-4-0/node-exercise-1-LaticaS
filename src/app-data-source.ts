@@ -5,7 +5,7 @@ export default new DataSource({
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'q1w2e3r4t5',
+  password: 'bazaLatica',
   database: 'postgres',
   entities: ['src/entities/*.ts'],
   migrations: ['src/migration/*.ts'],

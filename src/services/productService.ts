@@ -8,6 +8,9 @@ class ProductService {
   getAllProducts(): IProduct[] {
     return this.products
   }
+  //async getAllProducts(): Proizvod[] {
+  // const products = await Proizvod.find()
+  // return products }
 
   getProductById(id: number): IProduct {
     const foundProduct = this.products.find((product) => product.id === id)
