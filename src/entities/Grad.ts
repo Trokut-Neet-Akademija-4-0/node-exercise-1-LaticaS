@@ -1,15 +1,19 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Adresa } from './Adresa'
+import Adresa from './Adresa'
 
 @Index('Grad_pkey', ['gradId'], { unique: true })
 @Entity('Grad', { schema: 'public' })
-export class Grad {
+export default class Grad extends BaseEntity {
+  @PrimaryGeneratedColumn({ type: 'integer', name: 'grad_id' })
+  gradId!: number
+
   @Column('character varying', {
     name: 'postanski_broj',
     nullable: true,
@@ -17,15 +21,12 @@ export class Grad {
   })
   postanskiBroj!: string | null
 
-  @Column('character varying', { name: 'Drzava', nullable: true, length: 255 })
-  drzava!: string | null
-
-  @Column('character varying', { name: 'Grad', nullable: true, length: 255 })
+  @Column('character varying', { name: 'grad', nullable: true, length: 255 })
   grad!: string | null
 
-  @PrimaryGeneratedColumn({ type: 'integer', name: 'grad_id' })
-  gradId!: number
+  @Column('character varying', { name: 'drzava', nullable: true, length: 255 })
+  drzava!: string | null
 
-  @OneToMany(() => Adresa, (adresa) => adresa.grad)
+  @OneToMany(() => Adresa, (adresa: Adresa) => adresa.grad)
   adresas!: Adresa[]
 }

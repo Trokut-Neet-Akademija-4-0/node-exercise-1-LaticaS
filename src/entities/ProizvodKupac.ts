@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
@@ -6,36 +7,36 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Kosarica } from './Kosarica'
-import { Kupac } from './Kupac'
-import { Proizvod } from './Proizvod'
+import Kosarica from './Kosarica'
+import Kupac from './Kupac'
+import Proizvod from './Proizvod'
 
 @Index('ProizvodKupac_pkey', ['proizvodkupacId'], { unique: true })
 @Entity('ProizvodKupac', { schema: 'public' })
-export class ProizvodKupac {
-  @Column('integer', { name: 'Kolicina' })
+export default class ProizvodKupac extends BaseEntity {
+  @PrimaryGeneratedColumn({ type: 'integer', name: 'proizvodkupac_id' })
+  proizvodkupacId!: number
+
+  @Column('integer', { name: 'kolicina' })
   kolicina!: number
 
   @Column('numeric', {
-    name: 'Cijena',
+    name: 'cijena',
     nullable: true,
     precision: 10,
     scale: 2,
   })
   cijena!: string | null
 
-  @PrimaryGeneratedColumn({ type: 'integer', name: 'proizvodkupac_id' })
-  proizvodkupacId!: number
-
-  @ManyToOne(() => Kosarica, (kosarica) => kosarica.proizvodKupacs)
+  @ManyToOne(() => Kosarica, (kosarica: Kosarica) => kosarica.proizvodKupacs)
   @JoinColumn([{ name: 'kosarica_id', referencedColumnName: 'kosaricaId' }])
   kosarica!: Kosarica
 
-  @ManyToOne(() => Kupac, (kupac) => kupac.proizvodKupacs)
+  @ManyToOne(() => Kupac, (kupac: Kupac) => kupac.proizvodKupacs)
   @JoinColumn([{ name: 'kupac_id', referencedColumnName: 'kupacId' }])
   kupac!: Kupac
 
-  @ManyToOne(() => Proizvod, (proizvod) => proizvod.proizvodKupacs)
+  @ManyToOne(() => Proizvod, (proizvod: Proizvod) => proizvod.proizvodKupacs)
   @JoinColumn([{ name: 'proizvod_id', referencedColumnName: 'proizvodId' }])
   proizvod!: Proizvod
 }

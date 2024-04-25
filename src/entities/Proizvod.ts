@@ -1,15 +1,16 @@
 import {
+  BaseEntity,
   Column,
   Entity,
   Index,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { ProizvodKupac } from './ProizvodKupac'
+import ProizvodKupac from './ProizvodKupac'
 
 @Index('Proizvod_pkey', ['proizvodId'], { unique: true })
 @Entity('Proizvod', { schema: 'public' })
-export class Proizvod {
+export default class Proizvod extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'proizvod_id' })
   proizvodId!: number
 

@@ -1,3 +1,4 @@
+import Proizvod from '../entities/Proizvod'
 import IProduct from '../models/interfaces/productInterface'
 import products from '../models/productsModel'
 import HttpError from '../utils/HttpError'
@@ -5,10 +6,10 @@ import HttpError from '../utils/HttpError'
 class ProductService {
   private products: IProduct[] = products //zašto su products private?
 
-  getAllProducts(): IProduct[] {
-    return this.products
+  async getAllProducts(): Promise<Proizvod[]> {
+    return Proizvod.find()
   }
-  //async getAllProducts(): Proizvod[] {
+  //async getAllProducts(): Promise <Proizvod[]> {
   // const products = await Proizvod.find()
   // return products }
 
@@ -31,9 +32,15 @@ class ProductService {
     return deletedProduct[0]
   }
 
-  addNewProduct(product: IProduct): IProduct {
-    this.products.push(product)
-    return product
+  async addNewProduct(product: Proizvod): Promise<Proizvod> {
+    const proizvod = new Proizvod()
+    proizvod.title = product.title
+    proizvod.author = proizvod.author
+    proizvod.opis = product.opis
+    proizvod.publisher = product.publisher
+    proizvod.price = product.price
+    proizvod.kolicina = product.kolicina
+    return proizvod.save()
   }
 }
 
