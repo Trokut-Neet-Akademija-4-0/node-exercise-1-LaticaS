@@ -58,7 +58,7 @@ export default class Proizvod extends BaseEntity {
   img!: string | null
 
   @Column('numeric', { name: 'Price', precision: 10, scale: 2 })
-  price!: string
+  price!: number
 
   @Column('character varying', {
     name: 'Category',
@@ -75,4 +75,20 @@ export default class Proizvod extends BaseEntity {
 
   @OneToMany(() => ProizvodKupac, (proizvodKupac) => proizvodKupac.proizvod)
   proizvodKupacs!: ProizvodKupac[]
+
+  updateQuantityAndPrice(quantity: number, price: number) {
+    this.price = price
+    this.kolicina = quantity
+  }
+
+  //@OneToMany(() => Slika, (slika: Slika) => slika.proizvod)
+  //slikas!: Slika[]
+
+  updateExistingProduct(updatedData: Proizvod) {
+    this.price = updatedData.price
+    this.kolicina = updatedData.kolicina
+    this.title = updatedData.title
+    this.opis = updatedData.opis
+    this.publisher = updatedData.publisher
+  }
 }

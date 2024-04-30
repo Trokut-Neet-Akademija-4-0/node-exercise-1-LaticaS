@@ -1,4 +1,7 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable class-methods-use-this */
 import Proizvod from '../entities/Proizvod'
+//import Slika from '../entities/Slika'
 import IProduct from '../models/interfaces/productInterface'
 import products from '../models/productsModel'
 import HttpError from '../utils/HttpError'
@@ -7,40 +10,60 @@ class ProductService {
   private products: IProduct[] = products //zašto su products private?
 
   async getAllProducts(): Promise<Proizvod[]> {
-    return Proizvod.find()
+    return Proizvod.find({
+      relations: {
+        slikas: true,
+      },
+    })
   }
   //async getAllProducts(): Promise <Proizvod[]> {
   // const products = await Proizvod.find()
   // return products }
 
-  getProductById(id: number): IProduct {
-    const foundProduct = this.products.find((product) => product.id === id)
+  async getProductById(id: number): Promise<Proizvod> {
+    const foundProduct = await Proizvod.findOne({
+      relations: {
+        slikas: true,
+      },
+      where: {
+        proizvodId: id,
+      },
+    })
     if (!foundProduct)
       throw new HttpError(404, `Product with id ${id} not found`)
     return foundProduct
   }
 
-  deleteProductById(id: number): IProduct {
-    const indexToDelete = this.products.findIndex(
-      (product) => product.id === id,
-    )
+  async updateProduct(
+    productId: number,
+    existingProduct: Proizvod,
+  ): Promise<Proizvod> {
+    const product = await this.getProductById(productId)
+    product.updateExistingProduct(existingProduct)
+    return product.save()
+  }
 
-    if (indexToDelete < 0)
-      throw new HttpError(404, `Product with id ${id} not found`)
-
-    const deletedProduct = this.products.splice(indexToDelete, 1)
-    return deletedProduct[0]
+  async deleteProductById(id: number): Promise<Proizvod> {
+    const product = await this.getProductById(id)
+    return product.remove()
   }
 
   async addNewProduct(product: Proizvod): Promise<Proizvod> {
-    const proizvod = new Proizvod()
-    proizvod.title = product.title
-    proizvod.author = proizvod.author
-    proizvod.opis = product.opis
-    proizvod.publisher = product.publisher
-    proizvod.price = product.price
-    proizvod.kolicina = product.kolicina
+    const proizvod = Proizvod.create(product)
     return proizvod.save()
+  }
+
+  async addNewPicturesToExistingProduct(
+    productId: number,
+    //newPictures: Slika[],
+  ): Promise<Proizvod> {
+    const product = await this.getProductById(productId)
+    for await (const picture of newPictures) {
+      const newPictureEntity = Slika.create(picture)
+      newPictureEntity.proizvod = product
+      await newPictureEntity.save()
+    }
+    return this.getProductById(productId)
   }
 }
 
