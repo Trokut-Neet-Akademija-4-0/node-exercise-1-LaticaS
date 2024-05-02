@@ -7,6 +7,7 @@ import Racun from './entities/Racun'
 import Kupac from './entities/Kupac'
 import Grad from './entities/Grad'
 import Adresa from './entities/Adresa'
+import FileImportTracker from './entities/FileImportTracker'
 
 export default new DataSource({
   type: 'postgres',
@@ -24,5 +25,6 @@ export default new DataSource({
     Kosarica,
     Kupac,
     Proizvod,
+    FileImportTracker,
   ],
 })

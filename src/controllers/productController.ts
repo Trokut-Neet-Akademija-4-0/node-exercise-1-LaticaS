@@ -32,6 +32,13 @@ const deleteProductById = async (req: Request, res: Response) => {
 
 {
   /**** 
+   * 
+   * 
+   const getProductPictures = async (req: Request, res: Response) => {
+  const productId = Number.parseInt(req.params.id, 10)
+  res.send(await productService.getProductPictures(productId))
+}
+
 const addProductPictures = async (req: Request, res: Response) => {
   const productId = Number.parseInt(req.params.id, 10)
   const newPictures = req.body as Slika[]
@@ -42,7 +49,15 @@ const addProductPictures = async (req: Request, res: Response) => {
     ),
   )
 }
-*/
+
+const updatePictures = async (req: Request, res: Response) => {
+  const pictures = req.body as Slika[]
+  res.send(
+    await productService.updateExistingPicturesInExistingProduct(pictures),
+  )
+}
+
+******/
 }
 
 export {
@@ -52,4 +67,6 @@ export {
   //addProductPictures,
   updateProductById,
   deleteProductById,
+  //getProductPictures,
+  //updatePictures,
 }
