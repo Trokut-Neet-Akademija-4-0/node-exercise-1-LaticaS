@@ -59,11 +59,19 @@ export default class ProductImporter {
 
   private static ConvertCSVRecordToProizvodEntity(record: string[]): Proizvod {
     const product = new Proizvod()
-    product.title = record[0]
-    product.publisher = record[1]
-    product.opis = record[2]
-    product.price = Number.parseFloat(record[3])
-    product.kolicina = Number.parseInt(record[4], 10)
+    product.isbn = record[0]
+    product.title = record[1]
+    product.subtitle = record[2]
+    product.author = record[3]
+    product.published = record[4]
+    product.publisher = record[5]
+    product.pages = Number.parseInt(record[6])
+    product.description = record[7]
+    product.img = record[8]
+    product.price = Number.parseFloat(record[9])
+    product.category = record[10]
+    product.opis = record[11]
+    product.kolicina = Number.parseInt(record[12], 10)
     return product
   }
 }

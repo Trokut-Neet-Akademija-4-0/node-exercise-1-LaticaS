@@ -90,5 +90,12 @@ export default class Proizvod extends BaseEntity {
     this.title = updatedData.title
     this.opis = updatedData.opis
     this.publisher = updatedData.publisher
+    this.author = updatedData.author
+    this.proizvodKupacs = updatedData.proizvodKupacs
+    this.subtitle = updatedData.subtitle
+    this.description = updatedData.description
+    this.isbn = updatedData.isbn
+    this.pages = updatedData.pages
+    this.published = updatedData.published
   }
 }

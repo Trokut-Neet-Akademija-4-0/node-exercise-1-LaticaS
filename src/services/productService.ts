@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
 import Proizvod from '../entities/Proizvod'
-import Slika from '../entities/Slika'
 import IProduct from '../models/interfaces/productInterface'
 import products from '../models/productsModel'
 import HttpError from '../utils/HttpError'
@@ -10,11 +9,7 @@ class ProductService {
   private products: IProduct[] = products
 
   async getAllProducts(): Promise<Proizvod[]> {
-    return Proizvod.find({
-      relations: {
-        slikas: true,
-      },
-    })
+    return Proizvod.find({})
   }
   //async getAllProducts(): Promise <Proizvod[]> {
   // const products = await Proizvod.find()
@@ -22,9 +17,6 @@ class ProductService {
 
   async getProductById(id: number): Promise<Proizvod> {
     const foundProduct = await Proizvod.findOne({
-      relations: {
-        slikas: true,
-      },
       where: {
         proizvodId: id,
       },
@@ -52,11 +44,14 @@ class ProductService {
     const proizvod = Proizvod.create(product)
     return proizvod.save()
   }
+}
+// async getProductPictures(productId: number): Promise<Slika[]> {
+//  const product = await this.getProductById(productId)
+//  return product.slikas
+// }
 
-  // async getProductPictures(productId: number): Promise<Slika[]> {
-  //  const product = await this.getProductById(productId)
-  //  return product.slikas
-  // }
+{
+  /*  
 
   async addNewPicturesToExistingProduct(
     productId: number,
@@ -90,8 +85,10 @@ class ProductService {
         updatedPictures.push(await existingPicture.save())
       }
     }
-    return updatedPictures
+    return updatedPictures  
   }
+  
+*/
 }
 
 export default new ProductService()
