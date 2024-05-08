@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable class-methods-use-this */
+import { IsNull } from 'typeorm'
 import Proizvod from '../entities/Proizvod'
-import IProduct from '../models/interfaces/productInterface'
-import products from '../models/productsModel'
+import IProduct from '../models-request/interfaces/productInterface'
+import products from '../models-request/productsModel'
 import HttpError from '../utils/HttpError'
 
 class ProductService {
@@ -37,12 +38,20 @@ class ProductService {
 
   async deleteProductById(id: number): Promise<Proizvod> {
     const product = await this.getProductById(id)
-    return product.remove()
+    product.deletedAt = new Date()
+    return product.save()
   }
 
   async addNewProduct(product: Proizvod): Promise<Proizvod> {
     const proizvod = Proizvod.create(product)
     return proizvod.save()
+
+    //await proizvod.save()
+    //if (proizvod.slikas && proizvod.slikas.length > 0)
+    //return this.addNewPicturesToExistingProduct(
+    //proizvod.proizvodId,
+    //proizvod.slikas, )
+    //return proizvod
   }
 }
 // async getProductPictures(productId: number): Promise<Slika[]> {
@@ -86,6 +95,17 @@ class ProductService {
       }
     }
     return updatedPictures  
+  }
+  async deletePictureById(id: number): Promise<Slika | void> {
+    const existingPicture = await Slika.findOne({
+      where: {
+        slikaId: id,
+      },
+    })
+    if (existingPicture) {
+      return existingPicture.remove()
+    }
+    return undefined
   }
   
 */

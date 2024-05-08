@@ -38,4 +38,18 @@ export default class ProizvodKupac extends BaseEntity {
   @ManyToOne(() => Proizvod, (proizvod: Proizvod) => proizvod.proizvodKupacs)
   @JoinColumn([{ name: 'proizvod_id', referencedColumnName: 'proizvodId' }])
   proizvod!: Proizvod
+
+  public static CreateCartProduct(
+    cart: Kosarica,
+    product: Proizvod,
+    quantity: number,
+  ) {
+    const pk = new ProizvodKupac()
+    pk.cijena = product.price // ode se crvenilo na price / cijena!!! ovako se ne crveni.
+    pk.kolicina = quantity
+    pk.kosarica = cart
+    pk.proizvod = product
+    if (cart.kupac) pk.kupac = cart.kupac
+    return pk
+  }
 }

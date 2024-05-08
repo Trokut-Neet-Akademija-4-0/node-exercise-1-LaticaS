@@ -73,6 +73,12 @@ export default class Proizvod extends BaseEntity {
   @Column('integer', { name: 'kolicina', nullable: true })
   kolicina!: number | null
 
+  @Column('timestamp with time zone', {
+    name: 'deleted_at',
+    nullable: true,
+  })
+  deletedAt!: Date | null
+
   @OneToMany(() => ProizvodKupac, (proizvodKupac) => proizvodKupac.proizvod)
   proizvodKupacs!: ProizvodKupac[]
 
@@ -97,5 +103,6 @@ export default class Proizvod extends BaseEntity {
     this.isbn = updatedData.isbn
     this.pages = updatedData.pages
     this.published = updatedData.published
+    this.deletedAt = updatedData.deletedAt ?? null
   }
 }
