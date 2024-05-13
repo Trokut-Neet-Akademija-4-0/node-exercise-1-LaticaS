@@ -6,21 +6,24 @@ import {
   updateProductQuantity,
   removeProductFromCart,
   clearCart,
+  purchaseCartById,
 } from '../controllers/cartController'
+import AuthMiddleware from '../middlewares/authHandler'
 
 const router = express.Router()
 
 // dohvat cije kosarice
-router.get('/', getCart)
+router.get('/', AuthMiddleware.authenticateJWT, getCart)
 
 // dodavanje proizvoda na kosaricu pomocu product id-a
 router.get('/:cartId', getCartById)
+router.post('/:id/purchase', purchaseCartById)
 
 router.post('/:cartId/products/:productId/add', addProductToCart)
 router.put('/:cartId/products/:productId', updateProductQuantity)
 router.delete('/:cartId/products/:productId', removeProductFromCart)
 
 // ciscenje kosarice
-router.delete('/clear', clearCart)
+router.delete('/:cartId/products', clearCart)
 
 export default router
