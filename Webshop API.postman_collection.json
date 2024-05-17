@@ -1,0 +1,344 @@
+{
+  "info": {
+    "_postman_id": "a4e8fa2c-2473-456f-aad1-72f675501b35",
+    "name": "Webshop API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "11691364"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"imeProizvoda\": \"Pasta Zara bijela\",\r\n    \"proizvodjac\": \"Manistra d.o.o.\",\r\n    \"opis\": \"Tjestenina talianska\",\r\n    \"cijena\": \"12.56\",\r\n    \"kolicina\": 70,\r\n    \"slikas\": [\r\n        {\r\n            \"link\": \"https://dummyimage.com/333\",\r\n            \"opis\": \"slika za proizvod\",\r\n            \"naziv\": \"slika milka\",\r\n            \"isThumbnail\": true,\r\n            \"proizvodId\": 2\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product by Id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"imeProizvoda\": \"Pasta Zara Integralna\",\r\n    \"proizvodjac\": \"Manistra d.o.o.\",\r\n    \"opis\": \"Tjestenina talianska\",\r\n    \"cijena\": \"12.56\",\r\n    \"kolicina\": 100\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/:productId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", ":productId"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product by Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/:productId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", ":productId"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Products by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/:productId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", ":productId"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product Pictures",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/:productId/pictures",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", ":productId", "pictures"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Product Pictures",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/:productId/pictures",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", ":productId", "pictures"],
+              "variable": [
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product Picture by Picture Id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/pictures/:pictureId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", "pictures", ":pictureId"],
+              "variable": [
+                {
+                  "key": "pictureId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product Picture by Picture Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/products/pictures/:pictureId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["products", "pictures", ":pictureId"],
+              "variable": [
+                {
+                  "key": "pictureId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "Get Active Cart",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/cart",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["cart"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Cart by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/cart/:cartId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["cart", ":cartId"],
+              "variable": [
+                {
+                  "key": "cartId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Purchase Cart by Id",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/cart/:cartId/purchase",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["cart", ":cartId", "purchase"],
+              "variable": [
+                {
+                  "key": "cartId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Product to Cart",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"userId\": 1,\r\n    \"quantity\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{WebshopBackendApi}}/cart/:cartId/products/:productId/add",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["cart", ":cartId", "products", ":productId", "add"],
+              "variable": [
+                {
+                  "key": "cartId",
+                  "value": ""
+                },
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product in Cart",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"quantity\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{WebshopBackendApi}}/cart/:cartId/products/:productId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["cart", ":cartId", "products", ":productId"],
+              "variable": [
+                {
+                  "key": "cartId",
+                  "value": ""
+                },
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product from Cart",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{WebshopBackendApi}}/cart/:cartId/products/:productId",
+              "host": ["{{WebshopBackendApi}}"],
+              "path": ["cart", ":cartId", "products", ":productId"],
+              "variable": [
+                {
+                  "key": "cartId",
+                  "value": ""
+                },
+                {
+                  "key": "productId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
