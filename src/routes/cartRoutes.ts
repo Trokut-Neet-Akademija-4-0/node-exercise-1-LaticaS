@@ -9,11 +9,17 @@ import {
   purchaseCartById,
 } from '../controllers/cartController'
 import AuthMiddleware from '../middlewares/authHandler'
+import Role from '../models-request/enums/Role'
 
 const router = express.Router()
 
 // dohvat cije kosarice
-router.get('/', AuthMiddleware.authenticateJWT, getCart)
+router.get(
+  '/',
+  AuthMiddleware.authenticateJWT,
+  AuthMiddleware.authorizeRoles([Role.Admin, Role.User, Role.Manager]),
+  getCart,
+)
 
 // dodavanje proizvoda na kosaricu pomocu product id-a
 router.get('/:cartId', getCartById)

@@ -2,17 +2,20 @@ import {
   BaseEntity,
   Column,
   Entity,
+  Generated,
   Index,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm'
 import ProizvodKupac from './ProizvodKupac'
 import StringToFloatTransformer from '../utils/stringToFloatTransformer'
+import ProductResponse from '../models-request/response/ProductResponse'
 
 @Index('Proizvod_pkey', ['proizvodId'], { unique: true })
 @Entity('Proizvod', { schema: 'public' })
 export default class Proizvod extends BaseEntity {
-  @PrimaryGeneratedColumn({ type: 'integer', name: 'proizvod_id' })
+  @Generated()
+  @PrimaryColumn({ type: 'integer', name: 'proizvod_id' })
   proizvodId!: number
 
   @Column('character varying', { name: 'isbn', nullable: true, length: 55 })
@@ -110,5 +113,26 @@ export default class Proizvod extends BaseEntity {
     this.pages = updatedData.pages
     this.published = updatedData.published
     this.deletedAt = updatedData.deletedAt ?? null
+  }
+
+  toProductResponse(): ProductResponse {
+    const productResponse = new ProductResponse()
+    productResponse.productId = this.proizvodId
+    productResponse.description = this.opis
+    productResponse.publisher = this.publisher
+    productResponse.price = this.price
+    productResponse.title = this.title
+    productResponse.quantity = this.kolicina
+
+    //const thumbnailImages =
+    //this.slikas && this.slikas.length > 0
+    //? this.slikas.filter((s) => s.isThumbnail)
+    //: []
+    //if (thumbnailImages.length > 0) {
+    //productResponse.thumbnailDescription = thumbnailImages[0].opis
+    //productResponse.thumbnailLink = thumbnailImages[0].link
+    //productResponse.thumbnailName = thumbnailImages[0].naziv
+    // }
+    return ProductResponse
   }
 }

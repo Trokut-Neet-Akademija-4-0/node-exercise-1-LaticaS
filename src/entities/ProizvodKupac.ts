@@ -10,6 +10,8 @@ import {
 import Kosarica from './Kosarica'
 import Kupac from './Kupac'
 import Proizvod from './Proizvod'
+import StringToFloatTransformer from '../utils/stringToFloatTransformer'
+import ProductResponse from '../models-request/response/ProductResponse'
 
 @Index('ProizvodKupac_pkey', ['proizvodkupacId'], { unique: true })
 @Entity('ProizvodKupac', { schema: 'public' })
@@ -24,6 +26,7 @@ export default class ProizvodKupac extends BaseEntity {
     name: 'cijena',
     precision: 10,
     scale: 2,
+    transformer: new StringToFloatTransformer(),
   })
   cijena!: number
 
@@ -51,5 +54,11 @@ export default class ProizvodKupac extends BaseEntity {
     pk.proizvod = product
     if (cart.kupac) pk.kupac = cart.kupac
     return pk
+  }
+  toCartProductsResponse(): ProductResponse {
+    const productResponse = this.proizvod.toProductResponse()
+    productResponse.quantity = this.kolicina
+    productResponse.price = this.cijena
+    return productResponse
   }
 }

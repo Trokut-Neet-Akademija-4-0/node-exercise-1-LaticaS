@@ -1,2 +1,8 @@
 node_modules
 dist
+public
+*.json
+jest.config.js
+.prettierrc
+README.md
+ 73 changes: 73 additions & 0 deletions73  

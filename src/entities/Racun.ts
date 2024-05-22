@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import Kosarica from './Kosarica'
+import StringToFloatTransformer from '../utils/stringToFloatTransformer'
 
 @Index('Racun_pkey', ['racunId'], { unique: true })
 @Entity('Racun', { schema: 'public' })
@@ -14,7 +15,13 @@ export default class Racun extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'racun_id' })
   racunId!: number
 
-  @Column('numeric', { name: 'total', nullable: true, precision: 10, scale: 2 })
+  @Column('numeric', {
+    name: 'total',
+    nullable: true,
+    precision: 10,
+    scale: 2,
+    transformer: new StringToFloatTransformer(),
+  })
   total!: number | null
 
   @Column('character varying', {

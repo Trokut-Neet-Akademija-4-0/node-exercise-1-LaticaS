@@ -5,16 +5,23 @@ import Proizvod from '../entities/Proizvod'
 import IProduct from '../models-request/interfaces/productInterface'
 import products from '../models-request/productsModel'
 import HttpError from '../utils/HttpError'
+import ProductResponse from '../models-request/response/ProductResponse'
 
 class ProductService {
   private products: IProduct[] = products
 
-  async getAllProducts(): Promise<Proizvod[]> {
-    return Proizvod.find({})
+  async getAllProducts(): Promise<ProductResponse[]> {
+    return (
+      await Proizvod.find({
+        relations: {
+          //slikas: true,
+        },
+        where: {
+          deletedAt: IsNull(),
+        },
+      })
+    ).map((p) => p.toProductResponse())
   }
-  //async getAllProducts(): Promise <Proizvod[]> {
-  // const products = await Proizvod.find()
-  // return products }
 
   async getProductById(id: number): Promise<Proizvod> {
     const foundProduct = await Proizvod.findOne({
