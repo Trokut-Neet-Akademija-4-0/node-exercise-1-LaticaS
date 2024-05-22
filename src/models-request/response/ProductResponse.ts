@@ -11,9 +11,9 @@ export default class ProductResponse {
 
   quantity!: number | null
 
-  thumbnailLink!: string | null
+  //thumbnailLink!: string | null
 
-  thumbnailDescription!: string | null
+  //thumbnailDescription!: string | null
 
-  thumbnailName!: string | null
+  //thumbnailName!: string | null
 }

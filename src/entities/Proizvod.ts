@@ -118,10 +118,10 @@ export default class Proizvod extends BaseEntity {
   toProductResponse(): ProductResponse {
     const productResponse = new ProductResponse()
     productResponse.productId = this.proizvodId
-    productResponse.description = this.opis
-    productResponse.publisher = this.publisher
-    productResponse.price = this.price
     productResponse.title = this.title
+    productResponse.publisher = this.publisher
+    productResponse.description = this.description
+    productResponse.price = this.price
     productResponse.quantity = this.kolicina
 
     //const thumbnailImages =
@@ -133,6 +133,6 @@ export default class Proizvod extends BaseEntity {
     //productResponse.thumbnailLink = thumbnailImages[0].link
     //productResponse.thumbnailName = thumbnailImages[0].naziv
     // }
-    return ProductResponse
+    return new ProductResponse()
   }
 }
